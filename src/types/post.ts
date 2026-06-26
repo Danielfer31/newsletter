@@ -23,7 +23,7 @@ export interface PostFrontmatter {
   fecha: string
   imagen: string
   extracto: string
-  cancion: string
+  cancion?: string
   tema: PostTheme
   layout: Layout
 }
