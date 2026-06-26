@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { Post, Category } from '@/types/post'
 import { CATEGORY_CONFIG } from '@/lib/maps'
