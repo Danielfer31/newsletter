@@ -1,5 +1,19 @@
 import type { Metadata } from 'next'
+import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-sans',
+})
 
 export const metadata: Metadata = {
   title: 'La Biblioteca de Apolo',
@@ -8,14 +22,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es">
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="min-h-screen" style={{ backgroundColor: 'var(--bg-base)' }}>
+    <html lang="es" className={`${playfair.variable} ${inter.variable}`}>
+      <body className="min-h-screen">
         {children}
       </body>
     </html>
