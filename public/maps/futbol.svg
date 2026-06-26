@@ -1,0 +1,23 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="400" fill="#001a00"/>
+  <g opacity="0.15">
+    <rect x="0" y="0" width="80" height="400" fill="#2d6a4f"/>
+    <rect x="160" y="0" width="80" height="400" fill="#2d6a4f"/>
+    <rect x="320" y="0" width="80" height="400" fill="#2d6a4f"/>
+    <rect x="480" y="0" width="80" height="400" fill="#2d6a4f"/>
+    <rect x="640" y="0" width="80" height="400" fill="#2d6a4f"/>
+  </g>
+  <rect x="60" y="30" width="680" height="340" fill="none" stroke="#2d6a4f" stroke-width="2" opacity="0.8"/>
+  <line x1="400" y1="30" x2="400" y2="370" stroke="#2d6a4f" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="400" cy="200" r="50" fill="none" stroke="#2d6a4f" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="400" cy="200" r="3" fill="#2d6a4f" opacity="0.8"/>
+  <rect x="60" y="130" width="120" height="140" fill="none" stroke="#2d6a4f" stroke-width="1.5" opacity="0.8"/>
+  <rect x="620" y="130" width="120" height="140" fill="none" stroke="#2d6a4f" stroke-width="1.5" opacity="0.8"/>
+  <rect x="60" y="165" width="50" height="70" fill="none" stroke="#2d6a4f" stroke-width="1.5" opacity="0.8"/>
+  <rect x="690" y="165" width="50" height="70" fill="none" stroke="#2d6a4f" stroke-width="1.5" opacity="0.8"/>
+  <rect x="40" y="175" width="20" height="50" fill="none" stroke="#c9a84c" stroke-width="2" opacity="0.6"/>
+  <rect x="740" y="175" width="20" height="50" fill="none" stroke="#c9a84c" stroke-width="2" opacity="0.6"/>
+  <circle cx="160" cy="200" r="2" fill="#2d6a4f" opacity="0.8"/>
+  <circle cx="640" cy="200" r="2" fill="#2d6a4f" opacity="0.8"/>
+  <text x="400" y="390" text-anchor="middle" fill="#c9a84c" font-size="10" font-family="serif" opacity="0.5" letter-spacing="3">LA CANCHA DEL MUNDO</text>
+</svg>

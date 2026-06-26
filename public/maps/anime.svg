@@ -1,0 +1,32 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="400" fill="#0a1628"/>
+  <g stroke="#1a6b8a" stroke-width="0.5" opacity="0.2">
+    <path d="M0 50 Q200 40 400 50 Q600 60 800 50" fill="none"/>
+    <path d="M0 100 Q200 90 400 100 Q600 110 800 100" fill="none"/>
+    <path d="M0 150 Q200 140 400 150 Q600 160 800 150" fill="none"/>
+    <path d="M0 250 Q200 240 400 250 Q600 260 800 250" fill="none"/>
+    <path d="M0 300 Q200 290 400 300 Q600 310 800 300" fill="none"/>
+    <path d="M0 350 Q200 340 400 350 Q600 360 800 350" fill="none"/>
+  </g>
+  <line x1="0" y1="200" x2="800" y2="200" stroke="#c9a84c" stroke-width="2" stroke-dasharray="10 5" opacity="0.8"/>
+  <text x="10" y="195" fill="#c9a84c" font-size="9" font-family="serif" opacity="0.8">GRAND LINE</text>
+  <g fill="#1a6b8a" opacity="0.5" stroke="#c9a84c" stroke-width="0.8">
+    <ellipse cx="150" cy="150" rx="30" ry="20"/>
+    <ellipse cx="300" cy="80" rx="25" ry="15"/>
+    <ellipse cx="400" cy="200" rx="20" ry="12"/>
+    <ellipse cx="550" cy="130" rx="35" ry="22"/>
+    <ellipse cx="680" cy="160" rx="28" ry="18"/>
+    <ellipse cx="200" cy="280" rx="32" ry="20"/>
+    <ellipse cx="450" cy="310" rx="26" ry="16"/>
+    <ellipse cx="630" cy="280" rx="30" ry="19"/>
+  </g>
+  <line x1="400" y1="0" x2="400" y2="400" stroke="#8B0000" stroke-width="3" opacity="0.6"/>
+  <text x="404" y="20" fill="#8B0000" font-size="9" font-family="serif" opacity="0.8">RED LINE</text>
+  <g transform="translate(720, 340)" stroke="#c9a84c" stroke-width="1" fill="none" opacity="0.6">
+    <circle r="20"/>
+    <line x1="0" y1="-20" x2="0" y2="20"/>
+    <line x1="-20" y1="0" x2="20" y2="0"/>
+    <text x="-3" y="-24" fill="#c9a84c" font-size="8" font-family="serif">N</text>
+  </g>
+  <text x="400" y="385" text-anchor="middle" fill="#c9a84c" font-size="10" font-family="serif" opacity="0.5" letter-spacing="3">LOS CUATRO MARES</text>
+</svg>

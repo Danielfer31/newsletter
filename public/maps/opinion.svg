@@ -1,0 +1,19 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="400" fill="#1a1400"/>
+  <rect width="800" height="400" fill="#c9a84c" opacity="0.05"/>
+  <g fill="#c9a84c" opacity="0.2" stroke="#c9a84c" stroke-width="0.8">
+    <path d="M60 60 L200 50 L220 150 L180 200 L100 190 L60 140 Z"/>
+    <path d="M200 50 L350 70 L370 160 L300 180 L220 150 Z"/>
+  </g>
+  <text x="450" y="150" fill="#c9a84c" font-size="13" font-family="serif" opacity="0.2" transform="rotate(-10, 450, 150)">TERRA INCOGNITA</text>
+  <text x="550" y="250" fill="#c9a84c" font-size="10" font-family="serif" opacity="0.15" transform="rotate(5, 550, 250)">HIC SVNT DRACONES</text>
+  <text x="300" y="300" fill="#c9a84c" font-size="11" font-family="serif" opacity="0.15" transform="rotate(-5, 300, 300)">TERRA INCOGNITA</text>
+  <path d="M350 70 Q500 60 600 100 Q700 140 720 200 Q740 260 700 300 Q650 350 500 360 Q350 370 280 340 Q200 310 180 270" fill="none" stroke="#c9a84c" stroke-width="1" stroke-dasharray="6 4" opacity="0.3"/>
+  <g transform="translate(720, 340)" stroke="#c9a84c" stroke-width="1" fill="none" opacity="0.6">
+    <circle r="20"/>
+    <line x1="0" y1="-20" x2="0" y2="20"/>
+    <line x1="-20" y1="0" x2="20" y2="0"/>
+    <text x="-3" y="-24" fill="#c9a84c" font-size="8" font-family="serif">N</text>
+  </g>
+  <text x="400" y="390" text-anchor="middle" fill="#c9a84c" font-size="10" font-family="serif" opacity="0.5" letter-spacing="3">TERRA INCÓGNITA</text>
+</svg>

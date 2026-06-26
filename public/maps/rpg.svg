@@ -1,0 +1,28 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="400" fill="#1a0d00"/>
+  <g fill="none" stroke="#b5660a" stroke-width="1.5" opacity="0.5">
+    <path d="M100 200 L130 150 L160 200"/>
+    <path d="M140 200 L170 140 L200 200"/>
+    <path d="M550 180 L580 120 L610 180"/>
+    <path d="M590 180 L620 130 L650 180"/>
+    <path d="M630 180 L660 150 L690 180"/>
+  </g>
+  <g fill="none" stroke="#b5660a" stroke-width="0.8" stroke-dasharray="5 3" opacity="0.4">
+    <path d="M60 60 L250 50 L260 180 L60 190 Z"/>
+    <path d="M260 50 L500 60 L490 200 L260 180 Z"/>
+    <path d="M500 60 L740 70 L730 200 L490 200 Z"/>
+  </g>
+  <text x="150" y="130" text-anchor="middle" fill="#c9a84c" font-size="11" font-family="serif" opacity="0.6">Reino del Norte</text>
+  <text x="375" y="130" text-anchor="middle" fill="#c9a84c" font-size="11" font-family="serif" opacity="0.6">Las Tierras Libres</text>
+  <text x="610" y="130" text-anchor="middle" fill="#c9a84c" font-size="11" font-family="serif" opacity="0.6">Imperio del Este</text>
+  <g stroke="#c9a84c" stroke-width="1" stroke-dasharray="4 2" opacity="0.3">
+    <path d="M60 200 Q400 220 740 200" fill="none"/>
+  </g>
+  <g transform="translate(720, 340)" stroke="#c9a84c" stroke-width="1" fill="none" opacity="0.6">
+    <circle r="20"/>
+    <line x1="0" y1="-20" x2="0" y2="20"/>
+    <line x1="-20" y1="0" x2="20" y2="0"/>
+    <text x="-3" y="-24" fill="#c9a84c" font-size="8" font-family="serif">N</text>
+  </g>
+  <text x="400" y="390" text-anchor="middle" fill="#c9a84c" font-size="10" font-family="serif" opacity="0.5" letter-spacing="3">TIERRAS FANTÁSTICAS</text>
+</svg>

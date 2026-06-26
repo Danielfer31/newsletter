@@ -1,0 +1,26 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="400" fill="#0d0d1a"/>
+  <g stroke="#8B0000" stroke-width="0.5" opacity="0.3">
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="200" y1="0" x2="200" y2="400"/>
+    <line x1="400" y1="0" x2="400" y2="400"/>
+    <line x1="600" y1="0" x2="600" y2="400"/>
+  </g>
+  <g fill="#8B0000" opacity="0.4" stroke="#c9a84c" stroke-width="0.8">
+    <path d="M80 80 L160 60 L200 90 L220 130 L200 170 L160 180 L120 160 L80 140 Z"/>
+    <path d="M160 200 L200 190 L220 230 L210 290 L180 320 L150 300 L140 260 L150 220 Z"/>
+    <path d="M330 70 L380 60 L400 80 L390 110 L360 120 L330 110 Z"/>
+    <path d="M340 140 L390 130 L410 160 L420 220 L400 280 L370 290 L340 260 L320 200 L330 160 Z"/>
+    <path d="M420 60 L560 50 L600 80 L610 120 L580 150 L540 160 L480 140 L440 120 L420 90 Z"/>
+    <path d="M560 240 L620 230 L640 260 L630 300 L590 310 L560 290 L550 260 Z"/>
+  </g>
+  <g transform="translate(720, 340)" stroke="#c9a84c" stroke-width="1" fill="none" opacity="0.6">
+    <circle r="20"/>
+    <line x1="0" y1="-20" x2="0" y2="20"/>
+    <line x1="-20" y1="0" x2="20" y2="0"/>
+    <text x="-3" y="-24" fill="#c9a84c" font-size="8" font-family="serif">N</text>
+  </g>
+  <text x="400" y="390" text-anchor="middle" fill="#c9a84c" font-size="10" font-family="serif" opacity="0.5" letter-spacing="3">MAPA DEL MUNDO CONOCIDO</text>
+</svg>

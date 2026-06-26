@@ -1,0 +1,46 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="nebula1" cx="30%" cy="40%">
+      <stop offset="0%" stop-color="#0a8b8b" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#001a1a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nebula2" cx="70%" cy="60%">
+      <stop offset="0%" stop-color="#6b2fa0" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#001a1a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="400" fill="#001a1a"/>
+  <rect width="800" height="400" fill="url(#nebula1)"/>
+  <rect width="800" height="400" fill="url(#nebula2)"/>
+  <g fill="#ffffff">
+    <circle cx="50" cy="50" r="1.5" opacity="0.9"/>
+    <circle cx="150" cy="100" r="1" opacity="0.7"/>
+    <circle cx="250" cy="60" r="2" opacity="0.8"/>
+    <circle cx="350" cy="90" r="1" opacity="0.6"/>
+    <circle cx="450" cy="40" r="1.5" opacity="0.9"/>
+    <circle cx="550" cy="80" r="1" opacity="0.7"/>
+    <circle cx="650" cy="50" r="2" opacity="0.8"/>
+    <circle cx="750" cy="90" r="1" opacity="0.6"/>
+    <circle cx="100" cy="200" r="1.5" opacity="0.7"/>
+    <circle cx="200" cy="250" r="1" opacity="0.9"/>
+    <circle cx="300" cy="200" r="2" opacity="0.6"/>
+    <circle cx="400" cy="240" r="1" opacity="0.8"/>
+    <circle cx="500" cy="200" r="1.5" opacity="0.7"/>
+    <circle cx="600" cy="230" r="1" opacity="0.9"/>
+    <circle cx="700" cy="200" r="2" opacity="0.6"/>
+    <circle cx="80" cy="320" r="1" opacity="0.8"/>
+    <circle cx="180" cy="350" r="1.5" opacity="0.7"/>
+    <circle cx="320" cy="330" r="1" opacity="0.6"/>
+    <circle cx="480" cy="350" r="2" opacity="0.9"/>
+    <circle cx="620" cy="320" r="1" opacity="0.7"/>
+    <circle cx="740" cy="350" r="1.5" opacity="0.8"/>
+  </g>
+  <g fill="none" stroke="#0a8b8b" stroke-width="0.8" opacity="0.3">
+    <ellipse cx="400" cy="200" rx="300" ry="100"/>
+    <ellipse cx="400" cy="200" rx="200" ry="70"/>
+    <ellipse cx="400" cy="200" rx="100" ry="40"/>
+  </g>
+  <circle cx="400" cy="200" r="15" fill="#c9a84c" opacity="0.5"/>
+  <circle cx="400" cy="200" r="8" fill="#c9a84c" opacity="0.8"/>
+  <text x="400" y="390" text-anchor="middle" fill="#c9a84c" font-size="10" font-family="serif" opacity="0.5" letter-spacing="3">EL UNIVERSO OBSERVABLE</text>
+</svg>
