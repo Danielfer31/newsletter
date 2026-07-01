@@ -27,6 +27,8 @@ function getResendClient(): Resend | null {
   return resend
 }
 
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'La Biblioteca de Apolo <onboarding@resend.dev>'
+
 const PENDING_TTL_SECONDS = 60 * 60 * 24 // 24h
 
 export async function createPendingSubscription(email: string): Promise<string | null> {
@@ -59,12 +61,13 @@ export async function sendConfirmationEmail(email: string, token: string, siteUr
   const confirmUrl = `${siteUrl}/api/newsletter/confirm?token=${token}`
 
   const { error } = await client.emails.send({
-    from: 'La Biblioteca de Apolo <onboarding@resend.dev>',
+    from: FROM_EMAIL,
     to: email,
     subject: 'Confirmá tu suscripción',
     html: `<p>Hacé click para confirmar tu suscripción:</p><p><a href="${confirmUrl}">${confirmUrl}</a></p>`,
   })
 
+  if (error) console.error('sendConfirmationEmail failed:', error)
   return !error
 }
 
@@ -77,6 +80,7 @@ export async function addConfirmedContact(email: string): Promise<boolean> {
 
   // A duplicate-contact error is treated as success (idempotent confirm).
   if (error && !error.message?.toLowerCase().includes('already exists')) {
+    console.error('addConfirmedContact failed:', error)
     return false
   }
   return true
@@ -97,15 +101,21 @@ export async function sendBroadcast(post: BroadcastPost, siteUrl: string): Promi
 
   const { data, error } = await client.broadcasts.create({
     audienceId,
-    from: 'La Biblioteca de Apolo <onboarding@resend.dev>',
+    from: FROM_EMAIL,
     subject: post.titulo,
     html: `<h1>${post.titulo}</h1><p>${post.extracto}</p><p><a href="${postUrl}">${postUrl}</a></p>`,
   })
 
-  if (error || !data) return null
+  if (error || !data) {
+    console.error('sendBroadcast failed:', error)
+    return null
+  }
 
   const { error: sendError } = await client.broadcasts.send(data.id)
-  if (sendError) return null
+  if (sendError) {
+    console.error('sendBroadcast failed:', sendError)
+    return null
+  }
 
   return data.id
 }
