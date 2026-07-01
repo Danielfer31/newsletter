@@ -1,7 +1,7 @@
 import { getPostBySlug, getAllPosts, getAdjacentPosts, getRoutePosts } from '@/lib/posts'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { SiteHeader, RoutePanel, EditorialFooter } from '@/components/editorial'
+import { SiteHeader, RoutePanel, EditorialFooter, GiscusComments } from '@/components/editorial'
 import { ViewCounter } from '@/components/ViewCounter'
 import { CATEGORY_META } from '@/lib/categories'
 import { formatPostDate, estimateReadingMinutes } from '@/lib/format'
@@ -224,6 +224,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             )}
           </div>
         </nav>
+
+        <GiscusComments term={post.slug} />
       </article>
 
       <EditorialFooter />
