@@ -62,11 +62,11 @@ export default function CategoriesClient({ initialCategory, postCounts, recentPo
           <div className="relative z-10 max-w-3xl">
             <p className="ui-label mb-4">Atlas editorial</p>
             <h1 id="categories-title" className="serif-title text-5xl font-medium leading-none text-ink md:text-6xl">
-              Rutas tematicas
+              Rutas temáticas
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-ink-soft">
-              Un explorador de las obsesiones que ordenan La Biblioteca de Apolo: poder, ficcion, juego,
-              musica, archivo y pensamiento en voz alta.
+              Un explorador de las obsesiones que ordenan La Biblioteca de Apolo: poder, ficción, juego,
+              música, archivo y pensamiento en voz alta.
             </p>
           </div>
 
@@ -172,7 +172,7 @@ export default function CategoriesClient({ initialCategory, postCounts, recentPo
                       </dd>
                     </div>
                     <div>
-                      <dt className="ui-label">Metafora</dt>
+                      <dt className="ui-label">Metáfora</dt>
                       <dd className="mt-2 text-sm font-semibold leading-6 text-ink">{activeMeta.mapExpression}</dd>
                     </div>
                   </dl>
@@ -199,7 +199,7 @@ export default function CategoriesClient({ initialCategory, postCounts, recentPo
                       ))}
                     </div>
                   ) : (
-                    <p className="mt-4 text-sm leading-6 text-ink-soft">Esta ruta aun espera su primera entrada publicada.</p>
+                    <p className="mt-4 text-sm leading-6 text-ink-soft">Esta ruta aún espera su primera entrada publicada.</p>
                   )}
                 </aside>
               </div>

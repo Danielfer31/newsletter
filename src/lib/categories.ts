@@ -36,6 +36,10 @@ export interface RouteExperience {
   deck: string
   mood: string
   motif: string
+  carouselSignal: string
+  carouselArtifact: string
+  carouselCue: string
+  carouselVolume: string
   layout: RouteLayout
   primaryModuleLabel: string
   secondaryModuleLabel: string
@@ -91,6 +95,10 @@ export const CATEGORY_META: Record<Category, CategoryMeta> = {
       deck: 'Una sala de mapas para leer el poder: cables, tratados, economías y territorios en tensión.',
       mood: 'Sala de mapas',
       motif: 'Fronteras, cables diplomáticos y coordenadas de crisis',
+      carouselSignal: 'Tablero mundial',
+      carouselArtifact: 'Fronteras, pactos y líneas de fractura',
+      carouselCue: 'Pulso rojo',
+      carouselVolume: 'Atlas de poder',
       layout: 'dossier',
       primaryModuleLabel: 'Expedientes recientes',
       secondaryModuleLabel: 'Lectura de tablero',
@@ -120,6 +128,10 @@ export const CATEGORY_META: Record<Category, CategoryMeta> = {
       deck: 'Lecturas sobre series, autoría y épica popular trazadas como rutas marítimas.',
       mood: 'Cuaderno de aventura',
       motif: 'Islas, corrientes, paneles limpios y marcas de viaje',
+      carouselSignal: 'Mar abierto',
+      carouselArtifact: 'Islas, aventuras y personajes en ruta',
+      carouselCue: 'Azul marea',
+      carouselVolume: 'Cuaderno manga',
       layout: 'voyage',
       primaryModuleLabel: 'Bitácora reciente',
       secondaryModuleLabel: 'Islas narrativas',
@@ -149,6 +161,10 @@ export const CATEGORY_META: Record<Category, CategoryMeta> = {
       deck: 'Táctica, cultura y pasión leídas desde una pizarra que también es crónica.',
       mood: 'Pizarra táctica',
       motif: 'Campo, flechas de presión, zonas y marcador editorial',
+      carouselSignal: 'Cancha viva',
+      carouselArtifact: 'Zonas, mitos y geometría del juego',
+      carouselCue: 'Verde táctico',
+      carouselVolume: 'Pizarra de juego',
       layout: 'tactics',
       primaryModuleLabel: 'Jugadas recientes',
       secondaryModuleLabel: 'Mapa de partido',
@@ -178,6 +194,10 @@ export const CATEGORY_META: Record<Category, CategoryMeta> = {
       deck: 'Discos, escenas y obsesiones auditivas conectadas por ondas, noches y rutas.',
       mood: 'Constelación sonora',
       motif: 'Ondas, vinilos, pentagramas cartográficos y escenas conectadas',
+      carouselSignal: 'Constelación sonora',
+      carouselArtifact: 'Discos, escenas y memoria auditiva',
+      carouselCue: 'Violeta nocturno',
+      carouselVolume: 'Vinilo anotado',
       layout: 'constellation',
       primaryModuleLabel: 'Lado A',
       secondaryModuleLabel: 'Escenas conectadas',
@@ -207,6 +227,10 @@ export const CATEGORY_META: Record<Category, CategoryMeta> = {
       deck: 'Una brújula argumental hecha de dudas, subrayados y notas personales.',
       mood: 'Margen abierto',
       motif: 'Notas al margen, subrayados, brújula y terra incognita',
+      carouselSignal: 'Margen abierto',
+      carouselArtifact: 'Ideas en borrador y dudas con brújula',
+      carouselCue: 'Dorado ensayo',
+      carouselVolume: 'Ensayo al margen',
       layout: 'margin',
       primaryModuleLabel: 'Cuadernos recientes',
       secondaryModuleLabel: 'Preguntas guía',
@@ -236,6 +260,10 @@ export const CATEGORY_META: Record<Category, CategoryMeta> = {
       deck: 'Diarios de partida, reglas y territorios imaginarios para jugar pensando.',
       mood: 'Mesa de campaña',
       motif: 'Hexágonos, dados, rutas de mazmorra y terreno',
+      carouselSignal: 'Mesa de aventura',
+      carouselArtifact: 'Dados, mapas hexagonales y mundos posibles',
+      carouselCue: 'Sepia legendario',
+      carouselVolume: 'Manual de campaña',
       layout: 'campaign',
       primaryModuleLabel: 'Diario de partida',
       secondaryModuleLabel: 'Mesa preparada',
@@ -265,6 +293,10 @@ export const CATEGORY_META: Record<Category, CategoryMeta> = {
       deck: 'Cine, libros, archivo y cultura popular ordenados como vitrinas conectadas.',
       mood: 'Gabinete pop',
       motif: 'Fichas, vitrinas, órbitas de referencias y objetos culturales',
+      carouselSignal: 'Archivo orbital',
+      carouselArtifact: 'Cine, libros y rarezas conectadas',
+      carouselCue: 'Azul archivo',
+      carouselVolume: 'Gabinete pop',
       layout: 'cabinet',
       primaryModuleLabel: 'Piezas recientes',
       secondaryModuleLabel: 'Archivo orbital',

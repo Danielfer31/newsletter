@@ -6,51 +6,6 @@ import { useRef, useState } from 'react'
 import { CATEGORY_META, CATEGORY_ORDER, CategoryMeta, getRouteHref } from '@/lib/categories'
 import { Category } from '@/types/post'
 
-const ROUTE_MOODS: Record<Category, { signal: string; artifact: string; cue: string; volume: string }> = {
-  geopolitica: {
-    signal: 'Tablero mundial',
-    artifact: 'Fronteras, pactos y lineas de fractura',
-    cue: 'Pulso rojo',
-    volume: 'Atlas de poder',
-  },
-  anime: {
-    signal: 'Mar abierto',
-    artifact: 'Islas, aventuras y personajes en ruta',
-    cue: 'Azul marea',
-    volume: 'Cuaderno manga',
-  },
-  futbol: {
-    signal: 'Cancha viva',
-    artifact: 'Zonas, mitos y geometria del juego',
-    cue: 'Verde tactico',
-    volume: 'Pizarra de juego',
-  },
-  musica: {
-    signal: 'Constelacion sonora',
-    artifact: 'Discos, escenas y memoria auditiva',
-    cue: 'Violeta nocturno',
-    volume: 'Vinilo anotado',
-  },
-  opinion: {
-    signal: 'Margen abierto',
-    artifact: 'Ideas en borrador y dudas con brujula',
-    cue: 'Dorado ensayo',
-    volume: 'Ensayo al margen',
-  },
-  rpg: {
-    signal: 'Mesa de aventura',
-    artifact: 'Dados, mapas hexagonales y mundos posibles',
-    cue: 'Sepia legendario',
-    volume: 'Manual de campaña',
-  },
-  cultura: {
-    signal: 'Archivo orbital',
-    artifact: 'Cine, libros y rarezas conectadas',
-    cue: 'Azul archivo',
-    volume: 'Gabinete pop',
-  },
-}
-
 export default function CategoryRouteCarousel() {
   const trackRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
@@ -92,7 +47,7 @@ export default function CategoryRouteCarousel() {
 
         <div className="flex items-center gap-3 self-start md:self-end">
           <Link href="/categorias" className="hidden rounded-full border border-line bg-paper-soft px-4 py-2 text-sm font-semibold text-sepia shadow-sm transition-colors hover:bg-paper hover:text-ink sm:inline">
-            Ver todas las categorias
+            Ver todas las categorías
           </Link>
           <div className="flex rounded-full border border-line bg-paper-soft p-1 shadow-sm" aria-label="Controles del carrusel">
             <button
@@ -157,7 +112,7 @@ export default function CategoryRouteCarousel() {
 
 function RouteSlide({ category, index, active }: { category: Category; index: number; active: boolean }) {
   const meta = CATEGORY_META[category]
-  const mood = ROUTE_MOODS[category]
+  const experience = meta.routeExperience
 
   return (
     <Link
@@ -179,12 +134,12 @@ function RouteSlide({ category, index, active }: { category: Category; index: nu
             <span className="ui-label" style={{ color: meta.accent }}>
               Ruta {String(index + 1).padStart(2, '0')}
             </span>
-            <span className="text-xs font-semibold uppercase text-ink-soft">{mood.cue}</span>
+            <span className="text-xs font-semibold uppercase text-ink-soft">{experience.carouselCue}</span>
           </div>
 
           <div className="mb-5 grid min-h-[8.5rem] grid-cols-[1fr_6.25rem] items-start gap-4 sm:grid-cols-[1fr_8.5rem]">
             <div>
-              <p className="text-sm font-semibold uppercase text-ink-soft">{mood.signal}</p>
+              <p className="text-sm font-semibold uppercase text-ink-soft">{experience.carouselSignal}</p>
               <h3 className="serif-title mt-3 text-4xl font-semibold leading-none text-ink">{meta.label}</h3>
               <p className="mt-4 max-w-[18rem] text-sm leading-6 text-ink-soft">{meta.longDescription}</p>
             </div>
@@ -196,9 +151,9 @@ function RouteSlide({ category, index, active }: { category: Category; index: nu
           <div className="mb-5 grid grid-cols-[1fr_auto] items-end gap-4 border-t border-line pt-5">
             <div>
               <p className="ui-label mb-2 normal-case tracking-normal" style={{ color: meta.accent }}>
-                {mood.volume}
+                {experience.carouselVolume}
               </p>
-              <p className="text-sm font-medium leading-5 text-ink">{mood.artifact}</p>
+              <p className="text-sm font-medium leading-5 text-ink">{experience.carouselArtifact}</p>
             </div>
             <span className="ui-label text-right normal-case tracking-normal" style={{ color: meta.accent }}>
               {meta.coordinates.label}
