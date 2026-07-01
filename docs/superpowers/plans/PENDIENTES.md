@@ -6,6 +6,7 @@ Orden decidido con el usuario: editor de posts → contador de visitas → **sus
 
 1. **Editor de posts (CLI)** — `npm run new-post`. Spec: `docs/superpowers/specs/2026-07-01-editor-de-posts-cli-design.md`. Plan: `docs/superpowers/plans/2026-07-01-editor-de-posts-cli.md`. Doc uso: `docs/CONTENT.md`.
 2. **Contador de visitas** — Upstash Redis + `/api/views/[slug]` + `ViewCounter`. Spec: `docs/superpowers/specs/2026-07-01-contador-de-visitas-design.md`. Plan: `docs/superpowers/plans/2026-07-01-contador-de-visitas.md`. Setup: `docs/VIEW_COUNTER_SETUP.md`. **Falta**: usuario debe crear integración Upstash Redis en Vercel dashboard (Storage → Marketplace) para que funcione en producción.
+3. **Comentarios (Giscus)** — GitHub Discussions embed, sin backend propio. Spec: `docs/superpowers/specs/2026-07-01-comentarios-giscus-design.md`. Plan: `docs/superpowers/plans/2026-07-01-comentarios-giscus.md`. Setup: `docs/GISCUS_SETUP.md`. **Falta**: usuario debe completar setup manual en giscus.app (instalar app, crear categoría `Comments`, obtener IDs) y configurar env vars en Vercel para que se muestre en producción.
 
 ## Pendiente 3: Suscripción newsletter
 
@@ -18,15 +19,6 @@ Orden decidido con el usuario: editor de posts → contador de visitas → **sus
 - Dónde vive el formulario: ya existe `src/components/editorial/SubscribeBox.tsx` (revisar si es solo UI placeholder o tiene lógica).
 
 Empezar por: `Read src/components/editorial/SubscribeBox.tsx` para ver qué ya existe, luego brainstorming.
-
-## Pendiente 4: Sistema de comentarios
-
-**No iniciado — falta brainstorming completo.** Al retomar, invocar `superpowers:brainstorming` y cubrir:
-
-- Hosted (Giscus vía GitHub Discussions, Disqus, utterances) vs. custom (requiere DB + moderación + anti-spam — mucho más trabajo).
-- Recomendación previa (no validada con usuario aún): **Giscus** — gratis, sin backend propio, usa GitHub Discussions, encaja bien con sitio estático en Vercel. Requiere que el usuario tenga el repo en GitHub público (verificar) y habilite Discussions.
-- Moderación: quién aprueba/borra comentarios.
-- Diseño visual del bloque de comentarios en `post/[slug]/page.tsx`.
 
 ## Contexto técnico relevante para ambos
 
