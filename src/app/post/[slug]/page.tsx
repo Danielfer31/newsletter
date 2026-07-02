@@ -1,8 +1,10 @@
 import { getPostBySlug, getAllPosts, getAdjacentPosts, getRoutePosts } from '@/lib/posts'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { SiteHeader, RoutePanel, EditorialFooter, GiscusComments } from '@/components/editorial'
+import { SiteHeader, RoutePanel, EditorialFooter, Comments } from '@/components/editorial'
 import { ViewCounter } from '@/components/ViewCounter'
+import { cookies } from 'next/headers'
+import { getComments, isCommentsConfigured, verifySession, SESSION_COOKIE } from '@/lib/comments'
 import { CATEGORY_META } from '@/lib/categories'
 import { formatPostDate, estimateReadingMinutes } from '@/lib/format'
 import ReactMarkdown from 'react-markdown'
@@ -76,6 +78,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const post = getPostBySlug(slug)
   if (!post) notFound()
+
+  const commentsAvailable = isCommentsConfigured()
+  const cookieStore = await cookies()
+  const verified = commentsAvailable && verifySession(cookieStore.get(SESSION_COOKIE)?.value) !== null
+  const comments = commentsAvailable ? await getComments(slug) : []
 
   const adjacent = getAdjacentPosts(slug)
   const routePosts = getRoutePosts(post.ruta)
@@ -225,7 +232,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           </div>
         </nav>
 
-        <GiscusComments term={post.slug} />
+        <Comments
+          slug={post.slug}
+          verified={verified}
+          available={commentsAvailable}
+          initialComments={comments}
+        />
       </article>
 
       <EditorialFooter />

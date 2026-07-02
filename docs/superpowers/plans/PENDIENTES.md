@@ -6,7 +6,7 @@ Orden decidido con el usuario: editor de posts → contador de visitas → **sus
 
 1. **Editor de posts (CLI)** — `npm run new-post`. Spec: `docs/superpowers/specs/2026-07-01-editor-de-posts-cli-design.md`. Plan: `docs/superpowers/plans/2026-07-01-editor-de-posts-cli.md`. Doc uso: `docs/CONTENT.md`.
 2. **Contador de visitas** — Upstash Redis + `/api/views/[slug]` + `ViewCounter`. Spec: `docs/superpowers/specs/2026-07-01-contador-de-visitas-design.md`. Plan: `docs/superpowers/plans/2026-07-01-contador-de-visitas.md`. Setup: `docs/VIEW_COUNTER_SETUP.md`. **Falta**: usuario debe crear integración Upstash Redis en Vercel dashboard (Storage → Marketplace) para que funcione en producción.
-3. **Comentarios (Giscus)** — GitHub Discussions embed, sin backend propio. Spec: `docs/superpowers/specs/2026-07-01-comentarios-giscus-design.md`. Plan: `docs/superpowers/plans/2026-07-01-comentarios-giscus.md`. Setup: `docs/GISCUS_SETUP.md`. **Falta**: usuario debe completar setup manual en giscus.app (instalar app, crear categoría `Comments`, obtener IDs) y configurar env vars en Vercel para que se muestre en producción.
+3. **Comentarios (sistema propio)** — reemplaza Giscus. Backend propio sobre Redis + Resend (comentar = suscribirse, doble opt-in). Módulo `src/lib/comments.ts`, rutas `POST /api/comments` y `GET /api/comments/confirm`, componente `src/components/editorial/Comments.tsx`. Spec: `docs/superpowers/specs/2026-07-01-comentarios-propios-design.md`. Setup: `docs/GISCUS_SETUP.md` (reescrito para comentarios propios). **Falta**: usuario debe configurar `COMMENT_SESSION_SECRET` (más las env vars de newsletter) en Vercel. Giscus obsoleto: spec anterior `2026-07-01-comentarios-giscus-design.md` reemplazado.
 
 ## Pendiente 3: Suscripción newsletter
 
