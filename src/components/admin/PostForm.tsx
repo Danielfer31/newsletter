@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Post, Category, Layout, FontStyle, MarginNote } from '@/types/post'
+import { CATEGORY_ORDER } from '@/lib/categories'
 
-const CATEGORIES: Category[] = ['geopolitica', 'anime', 'futbol', 'musica', 'rpg', 'cultura', 'opinion']
 const LAYOUTS: Layout[] = ['pergamino', 'cosmos', 'carta', 'tablero', 'manga']
 const FONTS: FontStyle[] = ['serif', 'sans', 'mono', 'display']
 
@@ -58,17 +58,23 @@ export function PostForm({ post }: { post?: Post }) {
   const [form, setForm] = useState<FormState>(() => toFormState(post))
   const [error, setError] = useState<string | null>(null)
   const [saving, setSaving] = useState(false)
+  const [uploading, setUploading] = useState(false)
 
   async function handleImageUpload(file: File) {
-    const body = new FormData()
-    body.append('file', file)
-    const res = await fetch('/api/admin/upload', { method: 'POST', body })
-    if (!res.ok) {
-      setError('No se pudo subir la imagen')
-      return
+    setUploading(true)
+    try {
+      const body = new FormData()
+      body.append('file', file)
+      const res = await fetch('/api/admin/upload', { method: 'POST', body })
+      if (!res.ok) {
+        setError('No se pudo subir la imagen')
+        return
+      }
+      const { url } = await res.json()
+      setForm((f) => ({ ...f, imagen: url }))
+    } finally {
+      setUploading(false)
     }
-    const { url } = await res.json()
-    setForm((f) => ({ ...f, imagen: url }))
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -80,21 +86,25 @@ export function PostForm({ post }: { post?: Post }) {
     const { slug: _slug, ...frontmatterAndBody } = form
     void _slug
 
-    const res = await fetch(isEditing ? `/api/admin/posts/${slug}` : '/api/admin/posts', {
-      method: isEditing ? 'PUT' : 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(isEditing ? frontmatterAndBody : { ...frontmatterAndBody, slug }),
-    })
+    try {
+      const res = await fetch(isEditing ? `/api/admin/posts/${slug}` : '/api/admin/posts', {
+        method: isEditing ? 'PUT' : 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(isEditing ? frontmatterAndBody : { ...frontmatterAndBody, slug }),
+      })
 
-    setSaving(false)
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        setError(data.error ?? 'Error al guardar')
+        return
+      }
 
-    if (!res.ok) {
-      const data = await res.json().catch(() => ({}))
-      setError(data.error ?? 'Error al guardar')
-      return
+      router.push('/admin')
+    } catch {
+      setError('Error de red al guardar')
+    } finally {
+      setSaving(false)
     }
-
-    router.push('/admin')
   }
 
   function updateNota(index: number, patch: Partial<MarginNote>) {
@@ -129,7 +139,7 @@ export function PostForm({ post }: { post?: Post }) {
           value={form.categoria}
           onChange={(e) => setForm((f) => ({ ...f, categoria: e.target.value as Category }))}
         >
-          {CATEGORIES.map((c) => (
+          {CATEGORY_ORDER.map((c) => (
             <option key={c} value={c}>{c}</option>
           ))}
         </select>
@@ -276,8 +286,8 @@ export function PostForm({ post }: { post?: Post }) {
         />
       </label>
 
-      <button type="submit" disabled={saving} className="border px-4 py-2">
-        {saving ? 'Guardando…' : isEditing ? 'Guardar cambios' : 'Crear post'}
+      <button type="submit" disabled={saving || uploading} className="border px-4 py-2">
+        {uploading ? 'Subiendo imagen…' : saving ? 'Guardando…' : isEditing ? 'Guardar cambios' : 'Crear post'}
       </button>
     </form>
   )
