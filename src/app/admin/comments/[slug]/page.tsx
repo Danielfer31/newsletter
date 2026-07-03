@@ -14,7 +14,7 @@ export default function AdminCommentsPage({ params }: { params: Promise<{ slug: 
   }, [slug])
 
   async function handleDelete(id: string) {
-    await fetch(`/api/admin/comments/${id}`, { method: 'DELETE' })
+    await fetch(`/api/admin/comment/${id}`, { method: 'DELETE' })
     setComments((cs) =>
       cs
         .filter((c) => c.id !== id)
@@ -25,7 +25,7 @@ export default function AdminCommentsPage({ params }: { params: Promise<{ slug: 
   async function handleEdit(id: string, currentBody: string) {
     const body = prompt('Editar comentario', currentBody)
     if (body === null) return
-    await fetch(`/api/admin/comments/${id}`, {
+    await fetch(`/api/admin/comment/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ body }),
