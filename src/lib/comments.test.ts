@@ -52,3 +52,61 @@ describe('updateComment', () => {
     expect(mockRedis.set).not.toHaveBeenCalled()
   })
 })
+
+describe('deleteComment', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+  })
+
+  it('deletes a top-level comment and cascades to its replies', async () => {
+    const topLevel = {
+      id: 'c1',
+      slug: 'post-1',
+      parentId: null,
+      name: 'A',
+      email: 'a@b.com',
+      body: 'top',
+      createdAt: 1000,
+    }
+    mockRedis.get.mockResolvedValueOnce(topLevel) // fetch the comment being deleted
+    mockRedis.zrange.mockResolvedValueOnce(['r1', 'r2']) // reply ids
+
+    const { deleteComment } = await import('./comments')
+    await deleteComment('c1')
+
+    expect(mockRedis.del).toHaveBeenCalledWith('comment:r1')
+    expect(mockRedis.del).toHaveBeenCalledWith('comment:r2')
+    expect(mockRedis.del).toHaveBeenCalledWith('replies:c1')
+    expect(mockRedis.del).toHaveBeenCalledWith('comment:c1')
+    expect(mockRedis.zrem).toHaveBeenCalledWith('comments:post-1', 'c1')
+  })
+
+  it('deletes a reply without touching siblings', async () => {
+    const reply = {
+      id: 'r1',
+      slug: 'post-1',
+      parentId: 'c1',
+      name: 'B',
+      email: 'b@c.com',
+      body: 'reply',
+      createdAt: 1500,
+    }
+    mockRedis.get.mockResolvedValueOnce(reply)
+
+    const { deleteComment } = await import('./comments')
+    await deleteComment('r1')
+
+    expect(mockRedis.del).toHaveBeenCalledWith('comment:r1')
+    expect(mockRedis.zrem).toHaveBeenCalledWith('replies:c1', 'r1')
+    expect(mockRedis.zrem).not.toHaveBeenCalledWith('comments:post-1', 'r1')
+  })
+
+  it('no-ops when the comment does not exist', async () => {
+    mockRedis.get.mockResolvedValueOnce(null)
+
+    const { deleteComment } = await import('./comments')
+    await deleteComment('missing')
+
+    expect(mockRedis.del).not.toHaveBeenCalled()
+  })
+})

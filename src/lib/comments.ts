@@ -176,6 +176,25 @@ export async function updateComment(
   return updated
 }
 
+export async function deleteComment(id: string): Promise<void> {
+  const client = getRedisClient()
+  if (!client) return
+
+  const comment = await client.get<Comment>(commentKey(id))
+  if (!comment) return
+
+  if (comment.parentId === null) {
+    const replyIds = await client.zrange<string[]>(repliesKey(id), 0, -1)
+    await Promise.all(replyIds.map((replyId) => client.del(commentKey(replyId))))
+    await client.del(repliesKey(id))
+    await client.zrem(topLevelKey(comment.slug), id)
+  } else {
+    await client.zrem(repliesKey(comment.parentId), id)
+  }
+
+  await client.del(commentKey(id))
+}
+
 async function fetchComments(ids: string[]): Promise<Comment[]> {
   const client = getRedisClient()
   if (!client || ids.length === 0) return []
