@@ -8,6 +8,14 @@ function postPath(slug: string): string {
   return `content/posts/${slug}.md`
 }
 
+const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+
+function assertSafeSlug(slug: string): void {
+  if (!SLUG_PATTERN.test(slug)) {
+    throw new Error(`Slug inválido: ${slug}`)
+  }
+}
+
 // `Octokit` is a real ES class in production and must be invoked with `new`.
 // Test doubles (e.g. `vi.fn(() => ({...}))`) are plain functions and cannot
 // be targets of `new`/`Reflect.construct`. Support both without weakening
@@ -35,6 +43,7 @@ async function getFileSha(octokit: Octokit, path: string): Promise<string | null
 }
 
 export async function commitPost(slug: string, markdown: string, accessToken: string): Promise<void> {
+  assertSafeSlug(slug)
   const octokit = createOctokit(accessToken)
   const path = postPath(slug)
   const sha = await getFileSha(octokit, path)
@@ -51,6 +60,7 @@ export async function commitPost(slug: string, markdown: string, accessToken: st
 }
 
 export async function deletePost(slug: string, accessToken: string): Promise<void> {
+  assertSafeSlug(slug)
   const octokit = createOctokit(accessToken)
   const path = postPath(slug)
   const sha = await getFileSha(octokit, path)

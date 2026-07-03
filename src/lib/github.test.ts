@@ -80,3 +80,12 @@ describe('deletePost', () => {
     await expect(deletePost('missing-slug', 'fake-token')).rejects.toThrow()
   })
 })
+
+describe('slug validation', () => {
+  it('commitPost rejects a path-traversal slug', async () => {
+    await expect(commitPost('../../package.json', 'x', 'fake-token')).rejects.toThrow(/inválido/i)
+  })
+  it('deletePost rejects a path-traversal slug', async () => {
+    await expect(deletePost('../../secret', 'fake-token')).rejects.toThrow(/inválido/i)
+  })
+})
