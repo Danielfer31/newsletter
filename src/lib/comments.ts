@@ -156,6 +156,26 @@ export async function publishComment(payload: PendingComment): Promise<Comment |
   return comment
 }
 
+export async function updateComment(
+  id: string,
+  patch: { name?: string; body?: string },
+): Promise<Comment | null> {
+  const client = getRedisClient()
+  if (!client) return null
+
+  const existing = await client.get<Comment>(commentKey(id))
+  if (!existing) return null
+
+  const updated: Comment = {
+    ...existing,
+    ...(patch.name !== undefined ? { name: patch.name } : {}),
+    ...(patch.body !== undefined ? { body: patch.body } : {}),
+  }
+
+  await client.set(commentKey(id), updated)
+  return updated
+}
+
 async function fetchComments(ids: string[]): Promise<Comment[]> {
   const client = getRedisClient()
   if (!client || ids.length === 0) return []
