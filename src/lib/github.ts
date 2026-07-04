@@ -16,6 +16,19 @@ function assertSafeSlug(slug: string): void {
   }
 }
 
+// Local filesystem reads (posts.ts) only see committed content after a
+// production rebuild, so every write must also nudge Vercel to redeploy.
+async function triggerDeploy(): Promise<void> {
+  const hookUrl = process.env.VERCEL_DEPLOY_HOOK_URL
+  if (!hookUrl) return
+
+  try {
+    await fetch(hookUrl, { method: 'POST' })
+  } catch (err) {
+    console.error('Vercel deploy hook failed:', err)
+  }
+}
+
 // `Octokit` is a real ES class in production and must be invoked with `new`.
 // Test doubles (e.g. `vi.fn(() => ({...}))`) are plain functions and cannot
 // be targets of `new`/`Reflect.construct`. Support both without weakening
@@ -57,6 +70,8 @@ export async function commitPost(slug: string, markdown: string, accessToken: st
     branch: BRANCH,
     ...(sha ? { sha } : {}),
   })
+
+  await triggerDeploy()
 }
 
 export async function deletePost(slug: string, accessToken: string): Promise<void> {
@@ -74,4 +89,6 @@ export async function deletePost(slug: string, accessToken: string): Promise<voi
     sha,
     branch: BRANCH,
   })
+
+  await triggerDeploy()
 }
