@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import {
   isCommentsConfigured,
   createPendingComment,
   publishComment,
   sendCommentConfirmationEmail,
   verifySession,
+  getComments,
   SESSION_COOKIE,
   MAX_BODY_LENGTH,
   PendingComment,
@@ -12,6 +14,15 @@ import {
 import { addConfirmedContact } from '@/lib/newsletter'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+export async function GET(request: NextRequest) {
+  const slug = request.nextUrl.searchParams.get('slug')?.trim()
+  if (!slug) {
+    return NextResponse.json({ error: 'Falta slug' }, { status: 400 })
+  }
+  const comments = await getComments(slug)
+  return NextResponse.json({ comments })
+}
 
 export async function POST(request: NextRequest) {
   if (!isCommentsConfigured()) {
@@ -61,6 +72,7 @@ export async function POST(request: NextRequest) {
     }
 
     await addConfirmedContact(cookieEmail)
+    revalidatePath(`/post/${slug}`)
 
     const { email, ...publicComment } = published
     void email // never expose the email in the public response

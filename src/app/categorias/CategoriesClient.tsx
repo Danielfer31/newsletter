@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { CategoryCard, SiteHeader, SiteHeaderNavItem } from '@/components/editorial'
+import { CategoryCard, SiteHeader } from '@/components/editorial'
 import { CATEGORY_META, CATEGORY_ORDER, getRouteHref } from '@/lib/categories'
 import { Category } from '@/types/post'
 
@@ -18,12 +18,6 @@ type CategoriesClientProps = {
   postCounts: Record<Category, number>
   recentPosts: CategoryPostSummary[]
 }
-
-const NAV_ITEMS: SiteHeaderNavItem[] = [
-  { label: 'Archivo', href: '/archivo' },
-  { label: 'Categorías', href: '/categorias' },
-  { label: 'Sobre el proyecto', href: '/sobre-el-proyecto' },
-]
 
 export default function CategoriesClient({ initialCategory, postCounts, recentPosts }: CategoriesClientProps) {
   const [activeCategory, setActiveCategory] = useState<Category>(initialCategory ?? CATEGORY_ORDER[0])
@@ -45,7 +39,7 @@ export default function CategoriesClient({ initialCategory, postCounts, recentPo
 
   return (
     <main className="paper-page min-h-screen">
-      <SiteHeader activeHref="/categorias" navItems={NAV_ITEMS} />
+      <SiteHeader activeHref="/categorias" />
 
       <section className="paper-map-bg overflow-hidden border-b border-line" aria-labelledby="categories-title">
         <Image

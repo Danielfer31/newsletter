@@ -6,10 +6,17 @@ imagen: /images/placeholder-anime.jpg
 extracto: "One Piece no es una historia de piratas. Es una filosofía de vida disfrazada de aventura. Y Luffy lo sabe sin saber que lo sabe."
 cancion: https://open.spotify.com/track/3YZScSUgm6jvFdqNVNRPYv
 tema:
-  fondo: "#0a1628"
-  acento: "#1a6b8a"
+  fondo: "#fbf7ee"
+  acento: "#28677d"
   fuente: serif
 layout: manga
+ruta:
+  - "2026-06-26-el-mundo-se-parte"
+notasMargen:
+  - title: "El concepto de Nakama"
+    body: "A diferencia del término tradicional de 'amigo', en el universo de Oda un nakama comparte un lazo inquebrantable de destino y libertad mutua."
+  - title: "La voluntad de D."
+    body: "Aquellos que llevan la D. en su nombre actúan históricamente como catalizadores naturales contra la opresión de los Dragones Celestiales."
 ---
 
 Luffy nunca entendió de política. No le importa quién gobierna qué isla, no le interesan los títulos ni el poder formal. Lo que le importa es simple, brutal y hermoso: ser libre y que sus amigos sean felices.

@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "# Biblioteca de Apolo rediseño-handoff/**",
+    "**/# Biblioteca de Apolo rediseño-handoff/**",
   ]),
 ]);
 

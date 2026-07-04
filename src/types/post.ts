@@ -11,6 +11,16 @@ export type Layout = 'pergamino' | 'cosmos' | 'carta' | 'tablero' | 'manga'
 
 export type FontStyle = 'serif' | 'sans' | 'mono' | 'display'
 
+export interface MarginNote {
+  title: string
+  body: string
+}
+
+export interface RouteLink {
+  title: string
+  slug: string
+}
+
 export interface PostTheme {
   fondo: string
   acento: string
@@ -26,6 +36,8 @@ export interface PostFrontmatter {
   cancion?: string
   tema: PostTheme
   layout: Layout
+  ruta?: string[]
+  notasMargen?: MarginNote[]
 }
 
 export interface Post extends PostFrontmatter {

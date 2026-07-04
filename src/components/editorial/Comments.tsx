@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useId, useState } from 'react'
+import { FormEvent, useEffect, useId, useRef, useState } from 'react'
 import type { PublicComment } from '@/lib/comments'
 
 export interface CommentsProps {
@@ -224,6 +224,7 @@ function CommentItem({
 
 export default function Comments({ slug, verified, available, initialComments }: CommentsProps) {
   const [comments, setComments] = useState<PublicComment[]>(initialComments)
+  const refreshing = useRef(false)
 
   function handleTopPublished(comment: PublicComment) {
     setComments((prev) => [...prev, comment])
@@ -234,6 +235,43 @@ export default function Comments({ slug, verified, available, initialComments }:
       prev.map((c) => (c.id === parentId ? { ...c, replies: [...c.replies, reply] } : c)),
     )
   }
+
+  useEffect(() => {
+    if (!available) return
+
+    const MIN_INTERVAL_MS = 4000
+    let lastFetch = 0
+
+    async function refresh() {
+      if (refreshing.current) return
+      if (Date.now() - lastFetch < MIN_INTERVAL_MS) return
+      lastFetch = Date.now()
+      refreshing.current = true
+      try {
+        const response = await fetch(`/api/comments?slug=${encodeURIComponent(slug)}`)
+        if (response.ok) {
+          const data = (await response.json()) as { comments: PublicComment[] }
+          setComments(data.comments)
+        }
+      } catch {
+        // Best-effort refresh — keep whatever was already rendered.
+      } finally {
+        refreshing.current = false
+      }
+    }
+
+    // Reader typically confirms via email in another tab, then comes back here.
+    function handleVisibility() {
+      if (document.visibilityState === 'visible') refresh()
+    }
+
+    window.addEventListener('focus', refresh)
+    document.addEventListener('visibilitychange', handleVisibility)
+    return () => {
+      window.removeEventListener('focus', refresh)
+      document.removeEventListener('visibilitychange', handleVisibility)
+    }
+  }, [slug, available])
 
   return (
     <section className="mx-auto mt-16 max-w-3xl border-t border-line pt-10">

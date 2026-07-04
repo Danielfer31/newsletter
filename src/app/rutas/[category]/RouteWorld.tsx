@@ -10,12 +10,6 @@ type RouteWorldProps = {
   posts: Post[]
 }
 
-const NAV_ITEMS = [
-  { label: 'Archivo', href: '/archivo' },
-  { label: 'Categorías', href: '/categorias' },
-  { label: 'Sobre el proyecto', href: '/sobre-el-proyecto' },
-]
-
 const layoutClass: Record<RouteLayout, string> = {
   dossier: 'md:grid-cols-[minmax(0,1.05fr)_22rem]',
   voyage: 'md:grid-cols-[minmax(0,0.9fr)_26rem]',
@@ -34,7 +28,7 @@ export default function RouteWorld({ category, posts }: RouteWorldProps) {
 
   return (
     <main className="paper-page min-h-screen">
-      <SiteHeader activeHref="/categorias" navItems={NAV_ITEMS} />
+      <SiteHeader activeHref="/categorias" />
 
       <section
         className="relative overflow-hidden border-b border-line"

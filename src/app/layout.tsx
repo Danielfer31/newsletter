@@ -1,18 +1,18 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Inter } from 'next/font/google'
+import { Archivo, Spectral } from 'next/font/google'
 import './globals.css'
 
-const playfair = Playfair_Display({
+const spectral = Spectral({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: ['300', '400', '500', '600', '700'],
   style: ['normal', 'italic'],
-  variable: '--font-serif',
+  variable: '--font-spectral',
 })
 
-const inter = Inter({
+const archivo = Archivo({
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  variable: '--font-sans',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-archivo',
 })
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="es" className={`${spectral.variable} ${archivo.variable}`}>
       <body className="min-h-screen">
         {children}
       </body>

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import {
   getPendingComment,
   deletePendingComment,
@@ -39,6 +40,7 @@ export async function GET(request: NextRequest) {
   }
 
   await addConfirmedContact(pending.email)
+  revalidatePath(`/post/${published.slug}`)
 
   const redirectUrl = new URL(`/post/${published.slug}#comment-${published.id}`, request.nextUrl.origin)
   const response = NextResponse.redirect(redirectUrl)

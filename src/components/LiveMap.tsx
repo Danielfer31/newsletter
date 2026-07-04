@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Category } from '@/types/post'
 import { CATEGORY_CONFIG } from '@/lib/maps'
@@ -10,12 +9,7 @@ interface LiveMapProps {
 }
 
 export default function LiveMap({ activeCategory }: LiveMapProps) {
-  const [currentCategory, setCurrentCategory] = useState<Category>('geopolitica')
-
-  useEffect(() => {
-    if (activeCategory) setCurrentCategory(activeCategory)
-  }, [activeCategory])
-
+  const currentCategory = activeCategory ?? 'geopolitica'
   const config = CATEGORY_CONFIG[currentCategory]
 
   return (
