@@ -158,11 +158,33 @@ export function PostForm({ post }: { post?: Post }) {
 
       <label className="block">
         Imagen
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => e.target.files?.[0] && handleImageUpload(e.target.files[0])}
-        />
+        <div className="mt-1 flex items-center gap-3 border border-dashed p-3 rounded">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            className="w-8 h-8 shrink-0 text-gray-500"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3 16.5V18a2.25 2.25 0 002.25 2.25h13.5A2.25 2.25 0 0021 18v-1.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+            />
+          </svg>
+          <div className="flex-1">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => e.target.files?.[0] && handleImageUpload(e.target.files[0])}
+            />
+            <p className="text-sm text-gray-500 mt-1">
+              Click para subir una imagen (JPG, PNG, WEBP)
+            </p>
+          </div>
+        </div>
         {form.imagen && <img src={form.imagen} alt="preview" className="mt-2 h-32 object-cover" />}
       </label>
 

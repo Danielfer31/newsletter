@@ -1,0 +1,50 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-07-04T15:30:21.902Z",
+  "phase": null,
+  "phase_name": "Admin panel auth + debugging session",
+  "phase_dir": null,
+  "plan": null,
+  "task": null,
+  "total_tasks": null,
+  "status": "paused",
+  "completed_tasks": [
+    { "id": 1, "name": "GitHub OAuth App creada (Client ID + Secret)", "status": "done" },
+    { "id": 2, "name": "Vars de auth (AUTH_GITHUB_ID/SECRET, AUTH_SECRET, ADMIN_GITHUB_USERNAME, GITHUB_REPO_*) agregadas a .env.local", "status": "done" },
+    { "id": 3, "name": "Verificado login OAuth funciona en /admin/login", "status": "done" },
+    { "id": 4, "name": "Bug: imagenes no subian en editor -> root cause: no existia Vercel Blob store", "status": "done", "commit": null },
+    { "id": 5, "name": "Proyecto linkeado a Vercel (apolo4/newsletter) via CLI", "status": "done" },
+    { "id": 6, "name": "Blob store 'apolo-newsletter-images' creado (access public) y linkeado; BLOB_READ_WRITE_TOKEN en .env.local", "status": "done" },
+    { "id": 7, "name": ".env.local reconstruido tras que 'vercel env pull' lo sobreescribiera (perdio temporalmente vars de auth/redis/resend)", "status": "done" },
+    { "id": 8, "name": "Icono + texto guia agregados al input de imagen en PostForm.tsx", "status": "done" },
+    { "id": 9, "name": "Bug: 'No se pudo guardar en GitHub' al crear post -> root cause: GITHUB_REPO_BRANCH=main pero esa rama no existe en el remoto (unico branch remoto real: codex/rutas-independientes)", "status": "done" },
+    { "id": 10, "name": "GITHUB_REPO_BRANCH corregido a codex/rutas-independientes en .env.local", "status": "done" }
+  ],
+  "remaining_tasks": [
+    { "id": 11, "name": "Usuario debe reiniciar dev server (Ctrl+C + npm run dev) para que tome GITHUB_REPO_BRANCH nuevo", "status": "not_started" },
+    { "id": 12, "name": "Reintentar guardar el post de prueba 'PRueba' y confirmar que el commit llega a GitHub", "status": "not_started" },
+    { "id": 13, "name": "Confirmar si el comentario de prueba nunca fue confirmado por email (pendiente respuesta del usuario) -> si no fue confirmado, no es bug, es comportamiento esperado", "status": "not_started" },
+    { "id": 14, "name": "Producción: agregar las 8 env vars (AUTH_GITHUB_ID/SECRET, AUTH_SECRET, ADMIN_GITHUB_USERNAME, GITHUB_REPO_OWNER/NAME/BRANCH, BLOB_READ_WRITE_TOKEN) en Vercel dashboard (Settings > Environment Variables)", "status": "not_started" },
+    { "id": 15, "name": "Producción: crear una SEGUNDA GitHub OAuth App para el dominio de prod (callback distinto, GitHub solo permite 1 callback por app)", "status": "not_started" },
+    { "id": 16, "name": "Seguridad: rotar AUTH_GITHUB_SECRET (Ov23liRTfyYWKG2PFIrZ / b188b325...) antes de ir a producción -- quedó expuesto en el historial de chat", "status": "not_started" }
+  ],
+  "blockers": [
+    { "description": "No se pudo verificar el flujo OAuth completo ni el upload de imagen de forma headless (preview tool no puede completar login real de GitHub)", "type": "external", "workaround": "Usuario prueba manualmente en su propio navegador logueado" }
+  ],
+  "human_actions_pending": [
+    { "action": "Rotar AUTH_GITHUB_SECRET en GitHub (Generate a new client secret) y actualizar .env.local + Vercel", "context": "El secreto se pegó en texto plano en el chat, ya está comprometido para producción", "blocking": true },
+    { "action": "Reiniciar dev server para tomar GITHUB_REPO_BRANCH corregido", "context": "Next.js no siempre recarga .env.local en caliente tras cambios múltiples", "blocking": true },
+    { "action": "Decidir: seguir commiteando posts a 'codex/rutas-independientes' o crear un branch 'main' formal", "context": "Se eligió la opción rápida (usar la rama existente); puede revisarse más adelante", "blocking": false }
+  ],
+  "decisions": [
+    { "decision": "GITHUB_REPO_BRANCH = codex/rutas-independientes (no 'main')", "rationale": "Es la única rama que existe en el remoto de GitHub ahora mismo; crear 'main' hubiera sido un paso extra no solicitado", "phase": null },
+    { "decision": "Vercel Blob store creado con --access public", "rationale": "Las imágenes de posts se sirven en <img src> público en el sitio", "phase": null },
+    { "decision": "Dos OAuth Apps separadas (local + producción) en vez de una compartida", "rationale": "GitHub OAuth Apps solo aceptan un callback URL cada una", "phase": null }
+  ],
+  "uncommitted_files": [
+    ".env.local (no versionado, gitignored -- cambios de env no aplican a git)",
+    "src/components/admin/PostForm.tsx (icono + texto guia en input de imagen)"
+  ],
+  "next_action": "Reiniciar npm run dev, loguear en /admin/login, reintentar crear el post 'PRueba' y confirmar que el commit llega al repo en GitHub (branch codex/rutas-independientes)",
+  "context_notes": "Sesión completa de: (1) setup de GitHub OAuth para el panel admin ya existente en código (NextAuth v5 + Octokit), (2) debugging sistemático de 2 bugs reportados por el usuario -- upload de imagen (root cause: Blob store nunca creado) y guardado de posts (root cause: branch de destino inexistente). Ambos root-caused y corregidos vía env vars + infra de Vercel, no vía cambios de código (excepto el icono de UI). Modo caveman activo toda la sesión por instrucción global del usuario."
+}
